@@ -20,6 +20,7 @@
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <lombok.version>1.18.22</lombok.version>
         <maven.surfire.plugin.version>2.22.2</maven.surfire.plugin.version>
+        <spring.cloud.version>2021.0.0</spring.cloud.version>
     </properties>
 
     <modules>
@@ -38,14 +39,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-<!--            <dependency>-->
-<!--                &lt;!&ndash; Import dependency management from Spring Cloud &ndash;&gt;-->
-<!--                <groupId>org.springframework.cloud</groupId>-->
-<!--                <artifactId>spring-cloud-dependencies</artifactId>-->
-<!--                <version>${spring.cloud.version}</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
+            <dependency>
+                <!-- Import dependency management from Spring Cloud -->
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
