@@ -2,7 +2,10 @@ package io.muenchendigital.digiwf.email.integration.configuration;
 
 import io.muenchendigital.digiwf.email.integration.domain.configuration.MailConfiguration;
 import io.muenchendigital.digiwf.email.integration.domain.service.MailingService;
+import io.muenchendigital.digiwf.s3.integration.client.configuration.S3IntegrationClientAutoConfiguration;
+import io.muenchendigital.digiwf.s3.integration.client.repository.DocumentStorageFileRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +17,10 @@ import javax.mail.MessagingException;
 
 @Configuration
 @RequiredArgsConstructor
-@ComponentScan(basePackages = "io.muenchendigital.digiwf.email.integration")
+@AutoConfigureAfter({ S3IntegrationClientAutoConfiguration.class })
+//TODO
+//@ComponentScan(basePackages = {"io.muenchendigital.digiwf.email.integration"})
+@ComponentScan(basePackages = {"io.muenchendigital.digiwf.email.integration","io.muenchendigital.digiwf.s3.integration.client"})
 @EnableConfigurationProperties({MailProperties.class, CustomMailProperties.class})
 public class MailAutoConfiguration {
 
@@ -40,7 +46,7 @@ public class MailAutoConfiguration {
     }
 
     @Bean
-    public MailingService getMailingService(final JavaMailSender javaMailSender) {
-        return new MailingService(javaMailSender, customMailProperties.getFromAdress());
+    public MailingService getMailingService(final JavaMailSender javaMailSender, final DocumentStorageFileRepository documentStorageFileRepository) {
+        return new MailingService(javaMailSender, customMailProperties.getFromAdress(), documentStorageFileRepository);
     }
 }

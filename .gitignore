@@ -42,3 +42,5 @@ gradle
 
 # Local Config
 /example/src/main/resources/application-local.yml
+/example/src/main/resources/application.yml
+/example/src/main/resources/application-streaming.properties

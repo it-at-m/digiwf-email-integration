@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+
 /**
  * Object contains all the information needed to send a mail.
  */
@@ -34,13 +36,10 @@ public class Mail {
      */
     private String replyTo;
 
-    /**
-     * Attachment of the mail.
-     */
-    private Attachment attachment;
+    private List<String> attachmentPaths;
 
     public boolean hasAttachement() {
-        return this.attachment != null && this.attachment.getContent() != null;
+        return this.attachmentPaths != null && this.attachmentPaths.size() > 0;
     }
 
     public boolean hasReplyTo() {
