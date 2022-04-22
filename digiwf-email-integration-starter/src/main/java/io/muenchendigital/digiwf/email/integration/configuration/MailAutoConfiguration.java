@@ -1,6 +1,5 @@
 package io.muenchendigital.digiwf.email.integration.configuration;
 
-import io.muenchendigital.digiwf.email.integration.domain.configuration.MailConfiguration;
 import io.muenchendigital.digiwf.email.integration.domain.service.MailingService;
 import io.muenchendigital.digiwf.s3.integration.client.configuration.S3IntegrationClientAutoConfiguration;
 import io.muenchendigital.digiwf.s3.integration.client.repository.DocumentStorageFileRepository;
