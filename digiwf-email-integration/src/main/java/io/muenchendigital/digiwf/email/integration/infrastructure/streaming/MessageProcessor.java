@@ -1,4 +1,4 @@
-package io.muenchendigital.digiwf.email.integration.domain.streaming;
+package io.muenchendigital.digiwf.email.integration.infrastructure.streaming;
 
 import io.muenchendigital.digiwf.email.integration.domain.exception.MissingInformationMailException;
 import io.muenchendigital.digiwf.email.integration.domain.model.Mail;
@@ -23,6 +23,7 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 public class MessageProcessor {
 
+    public static final String TYPE_HEADER_SEND_MAIL_FROM_EVENT_BUS = "sendMailFromEventBus";
     private final MailingService mailingService;
     private final CorrelateMessageService correlateMessageService;
     private static final String MAIL_SENT_STATUS = "mailSentStatus";
@@ -34,7 +35,7 @@ public class MessageProcessor {
     @Bean
     public MessageRoutingCallback mailRouter() {
         final Map<String, String> typeMappings = new HashMap<>();
-        typeMappings.put("sendMailFromEventBus", "sendMailFromEventBus");
+        typeMappings.put(TYPE_HEADER_SEND_MAIL_FROM_EVENT_BUS, TYPE_HEADER_SEND_MAIL_FROM_EVENT_BUS);
         return new RoutingCallback(typeMappings);
     }
 

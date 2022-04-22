@@ -1,4 +1,4 @@
-package io.muenchendigital.digiwf.email.integration.domain.configuration;
+package io.muenchendigital.digiwf.email.integration.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
