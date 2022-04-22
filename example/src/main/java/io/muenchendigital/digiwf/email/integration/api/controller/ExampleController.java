@@ -1,9 +1,11 @@
 package io.muenchendigital.digiwf.email.integration.api.controller;
 
+import io.muenchendigital.digiwf.email.integration.domain.exception.MissingInformationMailException;
 import io.muenchendigital.digiwf.email.integration.domain.model.Mail;
 import io.muenchendigital.digiwf.email.integration.domain.service.MailingService;
 import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.service.PayloadSenderService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class ExampleController {
 
     private final MailingService mailingService;
@@ -23,7 +26,11 @@ public class ExampleController {
 
     @GetMapping(value = "/testSendMail")
     public void testSendMail() {
-        mailingService.sendMail(getMail());
+        try {
+            mailingService.sendMail(getMail());
+        } catch (final MissingInformationMailException e) {
+            log.error(e.toString());
+        }
     }
 
     @GetMapping(value = "/testEventBus")

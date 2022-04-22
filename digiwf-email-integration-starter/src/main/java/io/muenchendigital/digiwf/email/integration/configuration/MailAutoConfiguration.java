@@ -18,7 +18,7 @@ import javax.mail.MessagingException;
 @Configuration
 @RequiredArgsConstructor
 @AutoConfigureAfter({ S3IntegrationClientAutoConfiguration.class })
-//TODO
+//TODO: can be switched when the S3 library updated its config
 //@ComponentScan(basePackages = {"io.muenchendigital.digiwf.email.integration"})
 @ComponentScan(basePackages = {"io.muenchendigital.digiwf.email.integration","io.muenchendigital.digiwf.s3.integration.client"})
 @EnableConfigurationProperties({MailProperties.class, CustomMailProperties.class})
@@ -45,6 +45,12 @@ public class MailAutoConfiguration {
         );
     }
 
+    /**
+     * Configures the {@link MailingService}
+     * @param javaMailSender the configured JavaMailSender
+     * @param documentStorageFileRepository a documentStorageFileRepository from the S3 library
+     * @return configured MailingService
+     */
     @Bean
     public MailingService getMailingService(final JavaMailSender javaMailSender, final DocumentStorageFileRepository documentStorageFileRepository) {
         return new MailingService(javaMailSender, customMailProperties.getFromAdress(), documentStorageFileRepository);

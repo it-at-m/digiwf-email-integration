@@ -11,15 +11,24 @@ import java.util.List;
  * Object contains all the information needed to send a mail.
  */
 @Data
-//@SuperBuilder
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Mail {
 
     /**
-     * Receivers addresses of the mail.
+     * Receiver addresses of the mail, comma separated.
      */
     private String receivers;
+
+    /**
+     * CC-Receiver addresses of the mail, comma separated.
+     */
+    private String receiversCc;
+
+    /**
+     * BCC-Receiver addresses of the mail, comma separated.
+     */
+    private String receiversBcc;
 
     /**
      * Subject of the mail.
