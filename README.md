@@ -1,15 +1,3 @@
-## Customize this file after creating the new REPO and remove this lines.
-What to adjust:
-* Add the your project or repo name direct under the logo.
-* Add a short and long desciption.
-* Add links for your final repo to report a bug or request a feature.
-* Add list of used technologies.
-* If you have, add a roadmap or remove this section.
-* Fill up the section for set up and documentation.
-* Start in this file only with documentation and link to the docs folder.
-* Add project shields. Use [shields.io](https://shields.io/)
-
-## ------- end to remove -------
 <div id="top"></div>
 
 <!-- PROJECT SHIELDS -->
@@ -36,19 +24,45 @@ What to adjust:
   </p>
 </div>
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#roadmap">Roadmap</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+    </li>
+    <li>
+      <a href="#Documentation">Documentation</a>
+    </li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 The goal of this library is enabling async mail dispatching with a Kafka EventBus and a S3-Filer as your environment.
 
 Features:
+
 * Can be used to dispatch emails asynchronously through kafka.
 * Can inform the receiver through kafka if the email has been sent or if there was a problem.
-* Can get attachment files from an S3-Filer, no need to get them yourself and send it through the Kafka EventBus several times. Less clutter in your EventBus!
-  
+* Can get attachment files from an S3-Filer, no need to get them yourself and send it through the Kafka EventBus several
+  times. Less clutter in your EventBus!
+
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -62,6 +76,7 @@ This project is built with:
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ROADMAP -->
+
 ## Roadmap
 
 See the [open issues](#) for a full list of proposed features (and known issues).
@@ -69,6 +84,7 @@ See the [open issues](#) for a full list of proposed features (and known issues)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Getting started
+
 Below is an example of how you can install and set up your service.
 
 1. Use the spring initalizer and create a Spring Boot application with `Spring Web`
@@ -110,17 +126,23 @@ implementation group: 'org.springframework.cloud', name: 'spring-cloud-stream-bi
 ```
 
 4. Configure your binder.<br>
-For an example on how to configure your binder, see [DigiWF Spring Cloudstream Utils](https://github.com/it-at-m/digiwf-spring-cloudstream-utils#getting-started)
-Note that you DO have to configure ```spring.cloud.function.definition=functionRouter;sendMessage;sendCorrelateMessage;```, but you don't need typeMappings. These are configured for you by the digiwf-mail-integration-starter.
-You also have to configure the topics you want to read / send messages from / to.
+   For an example on how to configure your binder,
+   see [DigiWF Spring Cloudstream Utils](https://github.com/it-at-m/digiwf-spring-cloudstream-utils#getting-started)
+   Note that you DO have to
+   configure ```spring.cloud.function.definition=functionRouter;sendMessage;sendCorrelateMessage;```, but you don't need
+   typeMappings. These are configured for you by the digiwf-mail-integration-starter. You also have to configure the
+   topics you want to read / send messages from / to.
 
 5. Configure S3
+
 ```
 io.muenchendigital.digiwf.s3.client.document-storage-url: http://s3-integration-url:port
 ```
+
 See [this](https://github.com/it-at-m/digiwf-spring-cloudstream-utils) for an example.
 
 6. Configure your application
+
 ```
 spring:
   mail:
@@ -142,23 +164,34 @@ spring:
       mail.smtp.socketFactory.fallback: true
       mail.smtp.starttls.enable: true
 ```
+
 You can also use digiwf.mail.fromAdress to define a mail adress when not using smtp.auth.
-7. Define a RestTemplate. For an example, please refer to the [example project](https://github.com/it-at-m/digiwf-email-integration/tree/dev/example).
+
+7. Define a RestTemplate. For an example, please refer to
+   the [example project](https://github.com/it-at-m/digiwf-email-integration/tree/dev/example).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Documentation
-To send an e-mail through the eventbus, simply create a [Mail](https://github.com/it-at-m/digiwf-email-integration/tree/dev/digiwf-email-integration/src/main/java/io/muenchendigital/digiwf/email/integration/domain/model/Mail.java) object, set the TYPE-Header to [MessageProcessor.TYPE_HEADER_SEND_MAIL_FROM_EVENT_BUS](https://github.com/it-at-m/digiwf-email-integration/tree/dev/digiwf-email-integration/src/main/java/io/muenchendigital/digiwf/email/integration/domain/streaming/MessageProcessor.java) and send it to the corresponding kafka topic. That's it!
+
+To send an e-mail through the eventbus, simply create
+a [Mail](https://github.com/it-at-m/digiwf-email-integration/tree/dev/digiwf-email-integration/src/main/java/io/muenchendigital/digiwf/email/integration/domain/model/Mail.java)
+object, set the TYPE-Header
+to [MessageProcessor.TYPE_HEADER_SEND_MAIL_FROM_EVENT_BUS](https://github.com/it-at-m/digiwf-email-integration/tree/dev/digiwf-email-integration/src/main/java/io/muenchendigital/digiwf/email/integration/domain/streaming/MessageProcessor.java)
+and send it to the corresponding kafka topic. That's it!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any
+contributions you make are **greatly appreciated**.
 
-If you have a suggestion that would make this better, please open an issue with the tag "enhancement", fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+If you have a suggestion that would make this better, please open an issue with the tag "enhancement", fork the repo and
+create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a
+star! Thanks again!
 
 1. Open an issue with the tag "enhancement"
 2. Fork the Project
@@ -173,6 +206,7 @@ More about this in the [CODE_OF_CONDUCT](/CODE_OF_CONDUCT.md) file.
 
 
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` file for more information.
@@ -182,6 +216,7 @@ Distributed under the MIT License. See `LICENSE` file for more information.
 
 
 <!-- CONTACT -->
+
 ## Contact
 
 it@m - opensource@muenchendigital.io
