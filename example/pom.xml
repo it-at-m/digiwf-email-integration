@@ -6,7 +6,7 @@
     <parent>
         <artifactId>digiwf-email-integration-parent</artifactId>
         <groupId>io.muenchendigital.digiwf</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
 
     <artifactId>example</artifactId>

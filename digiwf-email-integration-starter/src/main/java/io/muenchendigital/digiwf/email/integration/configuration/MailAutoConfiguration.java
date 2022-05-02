@@ -5,9 +5,9 @@ import io.muenchendigital.digiwf.s3.integration.client.configuration.S3Integrati
 import io.muenchendigital.digiwf.s3.integration.client.repository.DocumentStorageFileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -16,10 +16,8 @@ import javax.mail.MessagingException;
 
 @Configuration
 @RequiredArgsConstructor
-@AutoConfigureAfter({ S3IntegrationClientAutoConfiguration.class })
-//TODO: can be switched when the S3 library updated its config
-//@ComponentScan(basePackages = {"io.muenchendigital.digiwf.email.integration"})
-@ComponentScan(basePackages = {"io.muenchendigital.digiwf.email.integration","io.muenchendigital.digiwf.s3.integration.client"})
+@AutoConfigureAfter({S3IntegrationClientAutoConfiguration.class})
+@ComponentScan(basePackages = {"io.muenchendigital.digiwf.email.integration"})
 @EnableConfigurationProperties({MailProperties.class, CustomMailProperties.class})
 public class MailAutoConfiguration {
 
@@ -32,7 +30,7 @@ public class MailAutoConfiguration {
      *
      * @return configured JavaMailSender
      */
-    @Bean
+    @ConditionalOnMissingBean
     public JavaMailSender getJavaMailSender() throws MessagingException {
         return mailConfiguration.getJavaMailSender(
                 this.mailProperties.getHost(),
@@ -46,12 +44,13 @@ public class MailAutoConfiguration {
 
     /**
      * Configures the {@link MailingService}
-     * @param javaMailSender the configured JavaMailSender
+     *
+     * @param javaMailSender                the configured JavaMailSender
      * @param documentStorageFileRepository a documentStorageFileRepository from the S3 library
      * @return configured MailingService
      */
-    @Bean
+    @ConditionalOnMissingBean
     public MailingService getMailingService(final JavaMailSender javaMailSender, final DocumentStorageFileRepository documentStorageFileRepository) {
-        return new MailingService(javaMailSender, customMailProperties.getFromAdress(), documentStorageFileRepository);
+        return new MailingService(javaMailSender, customMailProperties.getFromAddress(), documentStorageFileRepository);
     }
 }

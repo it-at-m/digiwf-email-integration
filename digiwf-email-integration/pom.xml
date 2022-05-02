@@ -6,7 +6,7 @@
     <parent>
         <artifactId>digiwf-email-integration-parent</artifactId>
         <groupId>io.muenchendigital.digiwf</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
 
     <artifactId>digiwf-email-integration</artifactId>
@@ -16,10 +16,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-context-support</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
@@ -35,14 +31,16 @@
         </dependency>
         <dependency>
             <groupId>io.muenchendigital.digiwf</groupId>
-            <artifactId>digiwf-spring-cloudstream-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <artifactId>digiwf-s3-integration-client</artifactId>
+            <version>0.0.4</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- streaming -->
         <dependency>
             <groupId>io.muenchendigital.digiwf</groupId>
-            <artifactId>digiwf-s3-integration-client</artifactId>
-            <version>0.0.3</version>
+            <artifactId>digiwf-spring-cloudstream-utils</artifactId>
+            <version>0.0.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
