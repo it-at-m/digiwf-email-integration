@@ -33,6 +33,12 @@ public class ExampleController {
         }
     }
 
+    /**
+     * Note: for this to work, you have to configure both
+     * spring.cloud.stream.bindings.sendMessage-out-0.destination and
+     * spring.cloud.stream.bindings.functionRouter-in-0.destination
+     * to the same topic.
+     */
     @GetMapping(value = "/testEventBus")
     public void testEventBus() {
         genericPayloadSender.sendPayload(getMail(), "sendMailFromEventBus");
