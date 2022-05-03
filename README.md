@@ -165,7 +165,7 @@ spring:
       mail.smtp.starttls.enable: true
 ```
 
-You can also use digiwf.mail.fromAdress to define a mail adress when not using smtp.auth.
+You can also use digiwf.mail.fromAddress to define a mail adress when not using smtp.auth.
 
 7. Define a RestTemplate. For an example, please refer to
    the [example project](https://github.com/it-at-m/digiwf-email-integration/tree/dev/example).

@@ -7,6 +7,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "digiwf.mail")
 public class CustomMailProperties {
 
-    private String fromAdress = "noreply@noreply.com";
+    private String fromAddress = "noreply@noreply.com";
 
 }

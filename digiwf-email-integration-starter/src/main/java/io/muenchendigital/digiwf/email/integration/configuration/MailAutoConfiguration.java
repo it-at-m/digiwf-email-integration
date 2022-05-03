@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -30,6 +31,7 @@ public class MailAutoConfiguration {
      *
      * @return configured JavaMailSender
      */
+    @Bean
     @ConditionalOnMissingBean
     public JavaMailSender getJavaMailSender() throws MessagingException {
         return mailConfiguration.getJavaMailSender(
@@ -49,6 +51,7 @@ public class MailAutoConfiguration {
      * @param documentStorageFileRepository a documentStorageFileRepository from the S3 library
      * @return configured MailingService
      */
+    @Bean
     @ConditionalOnMissingBean
     public MailingService getMailingService(final JavaMailSender javaMailSender, final DocumentStorageFileRepository documentStorageFileRepository) {
         return new MailingService(javaMailSender, customMailProperties.getFromAddress(), documentStorageFileRepository);
