@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -50,9 +47,9 @@ public class ExampleController {
         mail.setSubject("Test1234");
         mail.setBody("Hallo test123");
         mail.setReplyTo("");
-        final List<String> attachmentPaths = new ArrayList<>();
-        attachmentPaths.add("test/picture.jpg");
-        mail.setAttachmentPaths(attachmentPaths);
+//        final List<String> attachmentPaths = new ArrayList<>();
+//        attachmentPaths.add("test/picture.jpg");
+//        mail.setAttachmentPaths(attachmentPaths);
         return mail;
     }
 

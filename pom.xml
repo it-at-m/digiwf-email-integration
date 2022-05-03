@@ -19,8 +19,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>2.6.6</spring.boot.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <lombok.version>1.18.22</lombok.version>
-        <okhttp.version>4.8.1</okhttp.version>
+        <lombok.version>1.18.24</lombok.version>
+        <okhttp.version>4.9.3</okhttp.version>
         <maven.surfire.plugin.version>2.22.2</maven.surfire.plugin.version>
         <spring.cloud.version>2021.0.1</spring.cloud.version>
         <tika.version>1.28.1</tika.version>
@@ -29,7 +29,7 @@
     <modules>
         <module>digiwf-email-integration</module>
         <module>digiwf-email-integration-starter</module>
-        <module>example</module>
+        <module>example-digiwf-email-integration</module>
     </modules>
 
     <dependencyManagement>

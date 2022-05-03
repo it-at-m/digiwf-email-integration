@@ -41,6 +41,6 @@ gradle
 .swagger-codegen-ignore
 
 # Local Config
-/example/src/main/resources/application-local.yml
-/example/src/main/resources/application.yml
-/example/src/main/resources/application-streaming.properties
+/example-digiwf-email-integration/src/main/resources/application-local.yml
+/example-digiwf-email-integration/src/main/resources/application.yml
+/example-digiwf-email-integration/src/main/resources/application-streaming.properties
