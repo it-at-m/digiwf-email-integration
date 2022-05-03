@@ -168,7 +168,7 @@ spring:
 You can also use digiwf.mail.fromAddress to define a mail address when not using smtp.auth.
 
 7. Define a RestTemplate. For an example, please refer to
-   the [example project](https://github.com/it-at-m/digiwf-email-integration/tree/dev/example).
+   the [example project](https://github.com/it-at-m/digiwf-email-integration/tree/dev/example-digiwf-email-integration).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
