@@ -3,8 +3,10 @@ package io.muenchendigital.digiwf.email.integration.configuration;
 import io.muenchendigital.digiwf.email.integration.domain.service.MailingService;
 import io.muenchendigital.digiwf.s3.integration.client.configuration.S3IntegrationClientAutoConfiguration;
 import io.muenchendigital.digiwf.s3.integration.client.repository.DocumentStorageFileRepository;
+import io.muenchendigital.digiwf.spring.cloudstream.utils.configuration.StreamingConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -19,6 +21,7 @@ import javax.mail.MessagingException;
 @Configuration
 @RequiredArgsConstructor
 @AutoConfigureAfter({S3IntegrationClientAutoConfiguration.class})
+@AutoConfigureBefore({StreamingConfiguration.class})
 @ComponentScan(basePackages = {"io.muenchendigital.digiwf.email.integration"})
 @EnableConfigurationProperties({MailProperties.class, CustomMailProperties.class})
 public class MailAutoConfiguration {
