@@ -97,6 +97,13 @@ the [documentations doc](https://github.com/it-at-m/digiwf-email-integration/blo
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Architecture
+
+For a small impression of the architecture, please refer to
+the [architecture doc](https://github.com/it-at-m/digiwf-email-integration/blob/add-docs/docs/architecture.md).
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- CONTRIBUTING -->
 
 ## Contributing
