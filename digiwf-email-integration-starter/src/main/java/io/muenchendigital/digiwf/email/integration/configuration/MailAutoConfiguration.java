@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.function.context.MessageRoutingCallback;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -55,5 +56,11 @@ public class MailAutoConfiguration {
     @ConditionalOnMissingBean
     public MailingService getMailingService(final JavaMailSender javaMailSender, final DocumentStorageFileRepository documentStorageFileRepository) {
         return new MailingService(javaMailSender, customMailProperties.getFromAddress(), documentStorageFileRepository);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public MessageRoutingCallback getEventBusRouter() {
+        return mailConfiguration.mailRouter();
     }
 }

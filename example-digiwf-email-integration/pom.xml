@@ -9,7 +9,7 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>example</artifactId>
+    <artifactId>example-digiwf-email-integration</artifactId>
 
     <dependencies>
         <dependency>
