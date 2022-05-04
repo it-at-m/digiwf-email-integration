@@ -1,0 +1,4 @@
+### testSendMail
+GET http://{{host}}/testSendMail
+### testEventBus
+GET http://{{host}}/testEventBus
