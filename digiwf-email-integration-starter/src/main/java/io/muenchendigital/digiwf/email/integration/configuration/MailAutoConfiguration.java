@@ -3,6 +3,7 @@ package io.muenchendigital.digiwf.email.integration.configuration;
 import io.muenchendigital.digiwf.email.integration.domain.service.MailingService;
 import io.muenchendigital.digiwf.s3.integration.client.configuration.S3IntegrationClientAutoConfiguration;
 import io.muenchendigital.digiwf.s3.integration.client.repository.DocumentStorageFileRepository;
+import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.infrastructure.RoutingCallback;
 import io.muenchendigital.digiwf.spring.cloudstream.utils.configuration.StreamingConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -17,6 +18,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import javax.mail.MessagingException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @RequiredArgsConstructor
@@ -29,6 +32,7 @@ public class MailAutoConfiguration {
     private final MailProperties mailProperties;
     private final CustomMailProperties customMailProperties;
     private final MailConfiguration mailConfiguration;
+    public static final String TYPE_HEADER_SEND_MAIL_FROM_EVENT_BUS = "sendMailFromEventBus";
 
     /**
      * Configures the {@link JavaMailSender}
@@ -61,9 +65,16 @@ public class MailAutoConfiguration {
         return new MailingService(javaMailSender, customMailProperties.getFromAddress(), documentStorageFileRepository);
     }
 
+    /**
+     * Override the custom router of the digiwf-spring-cloudstream-utils. We only have one type we need to map.
+     *
+     * @return the custom router
+     */
     @Bean
     @ConditionalOnMissingBean
     public MessageRoutingCallback getEventBusRouter() {
-        return mailConfiguration.mailRouter();
+        final Map<String, String> typeMappings = new HashMap<>();
+        typeMappings.put(TYPE_HEADER_SEND_MAIL_FROM_EVENT_BUS, TYPE_HEADER_SEND_MAIL_FROM_EVENT_BUS);
+        return new RoutingCallback(typeMappings);
     }
 }
