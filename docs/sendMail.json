@@ -57,7 +57,7 @@
       }
     },
     {
-      "label": "Empfänger",
+      "label": "Receiver",
       "type": "String",
       "value": "",
       "binding": {
@@ -70,7 +70,7 @@
       }
     },
     {
-      "label": "Empfänger (CC)",
+      "label": "Receiver (CC)",
       "type": "String",
       "value": "",
       "binding": {
@@ -83,7 +83,7 @@
       }
     },
     {
-      "label": "Empfänger (BCC)",
+      "label": "Receiver (BCC)",
       "type": "String",
       "value": "",
       "binding": {
@@ -96,7 +96,7 @@
       }
     },
     {
-      "label": "Betreff",
+      "label": "Subject",
       "type": "String",
       "value": "",
       "binding": {
@@ -122,7 +122,7 @@
       }
     },
     {
-      "label": "Reply-To Adresse",
+      "label": "Reply-To Address",
       "type": "String",
       "value": "",
       "binding": {
@@ -138,7 +138,7 @@
       "label": "Attachment Paths (S3)",
       "type": "String",
       "value": "",
-      "description": "Create an array with json.array('','')",
+      "description": "Create an array with json.array('','') (not yet implemented)",
       "binding": {
         "type": "camunda:in",
         "expression": true,
@@ -149,7 +149,7 @@
       }
     },
     {
-      "label": "Versandstatus",
+      "label": "Dispatch Status",
       "value": "mailSentStatus",
       "type": "Boolean",
       "binding": {
