@@ -45,14 +45,14 @@ public class Mail {
      */
     private String replyTo;
 
-    private List<String> attachmentPaths;
+    private List<Attachment> attachments;
 
     public boolean hasAttachement() {
-        return this.attachmentPaths != null && this.attachmentPaths.size() > 0;
+        return this.attachments != null && this.attachments.size() > 0;
     }
 
     public boolean hasReplyTo() {
-        return !StringUtils.isBlank(this.replyTo);
+        return StringUtils.isNotBlank(this.replyTo);
     }
 
 }

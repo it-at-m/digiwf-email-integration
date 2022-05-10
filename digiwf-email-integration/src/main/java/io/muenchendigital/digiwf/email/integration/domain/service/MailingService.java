@@ -23,6 +23,7 @@ public class MailingService {
     private final JavaMailSender mailSender;
     private final String fromAdress;
     private final DocumentStorageFileRepository documentStorageFileRepository;
+    private final int EXPIRES_IN_MINUTES = 3;
 
     /**
      * Send a mail.
@@ -67,15 +68,26 @@ public class MailingService {
             }
 
             if (mail.hasAttachement()) {
-                for (val attachmentPath : mail.getAttachmentPaths()) {
-                    final byte[] binaryFile = this.documentStorageFileRepository.getFile(
-                            attachmentPath,
-                            3
-                    );
-                    final Tika tika = new Tika();
-                    val file = new ByteArrayDataSource(binaryFile, tika.detect(binaryFile));
-                    val fileName = StringUtils.substringAfterLast(attachmentPath, "/");
-                    helper.addAttachment(fileName, file);
+                for (val attachment : mail.getAttachments()) {
+                    if (attachment.hasAttachmentPath()) {
+                        final byte[] binaryFile;
+                        if (attachment.hasDocumentStorageUrl()) {
+                            binaryFile = this.documentStorageFileRepository.getFile(
+                                    attachment.getAttachmentPath(),
+                                    EXPIRES_IN_MINUTES,
+                                    attachment.getDocumentStorageUrl()
+                            );
+                        } else {
+                            binaryFile = this.documentStorageFileRepository.getFile(
+                                    attachment.getAttachmentPath(),
+                                    EXPIRES_IN_MINUTES
+                            );
+                        }
+                        final Tika tika = new Tika();
+                        val file = new ByteArrayDataSource(binaryFile, tika.detect(binaryFile));
+                        val fileName = StringUtils.substringAfterLast(attachment.getAttachmentPath(), "/");
+                        helper.addAttachment(fileName, file);
+                    }
                 }
             }
         };

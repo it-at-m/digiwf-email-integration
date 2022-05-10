@@ -32,7 +32,7 @@
         <dependency>
             <groupId>io.muenchendigital.digiwf</groupId>
             <artifactId>digiwf-s3-integration-client</artifactId>
-            <version>0.0.4</version>
+            <version>${digiwf.s3.integration.client.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -40,7 +40,7 @@
         <dependency>
             <groupId>io.muenchendigital.digiwf</groupId>
             <artifactId>digiwf-spring-cloudstream-utils</artifactId>
-            <version>0.0.1</version>
+            <version>${digiwf.spring.cloudstream.utils.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
