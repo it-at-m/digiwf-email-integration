@@ -14,12 +14,8 @@ public class Attachment {
 
     private String attachmentPath;
 
-    public boolean hasAttachmentPath() {
-        return StringUtils.isNotBlank(attachmentPath);
-    }
-
-    public boolean hasDocumentStorageUrl() {
-        return StringUtils.isNotBlank(documentStorageUrl);
+    public boolean hasAllRelevantData() {
+        return StringUtils.isNotBlank(attachmentPath) && StringUtils.isNotBlank(documentStorageUrl);
     }
 
 }

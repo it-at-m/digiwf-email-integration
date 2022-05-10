@@ -69,20 +69,12 @@ public class MailingService {
 
             if (mail.hasAttachement()) {
                 for (val attachment : mail.getAttachments()) {
-                    if (attachment.hasAttachmentPath()) {
-                        final byte[] binaryFile;
-                        if (attachment.hasDocumentStorageUrl()) {
-                            binaryFile = this.documentStorageFileRepository.getFile(
-                                    attachment.getAttachmentPath(),
-                                    EXPIRES_IN_MINUTES,
-                                    attachment.getDocumentStorageUrl()
-                            );
-                        } else {
-                            binaryFile = this.documentStorageFileRepository.getFile(
-                                    attachment.getAttachmentPath(),
-                                    EXPIRES_IN_MINUTES
-                            );
-                        }
+                    if (attachment.hasAllRelevantData()) {
+                        final byte[] binaryFile = this.documentStorageFileRepository.getFile(
+                                attachment.getAttachmentPath(),
+                                EXPIRES_IN_MINUTES,
+                                attachment.getDocumentStorageUrl()
+                        );
                         final Tika tika = new Tika();
                         val file = new ByteArrayDataSource(binaryFile, tika.detect(binaryFile));
                         val fileName = StringUtils.substringAfterLast(attachment.getAttachmentPath(), "/");
