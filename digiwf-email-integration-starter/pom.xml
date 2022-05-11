@@ -6,7 +6,7 @@
     <parent>
         <artifactId>digiwf-email-integration-parent</artifactId>
         <groupId>io.muenchendigital.digiwf</groupId>
-        <version>0.0.1</version>
+        <version>0.0.2</version>
     </parent>
 
     <artifactId>digiwf-email-integration-starter</artifactId>
@@ -43,14 +43,20 @@
         <dependency>
             <groupId>io.muenchendigital.digiwf</groupId>
             <artifactId>digiwf-s3-integration-client-starter</artifactId>
-            <version>0.0.4</version>
+            <version>${digiwf.s3.integration.client.version}</version>
         </dependency>
 
         <!-- streaming -->
         <dependency>
             <groupId>io.muenchendigital.digiwf</groupId>
             <artifactId>digiwf-spring-cloudstream-utils-starter</artifactId>
-            <version>0.0.1</version>
+            <version>${digiwf.spring.cloudstream.utils.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.muenchendigital.digiwf</groupId>
+            <artifactId>digiwf-s3-integration-client</artifactId>
+            <version>0.0.6</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

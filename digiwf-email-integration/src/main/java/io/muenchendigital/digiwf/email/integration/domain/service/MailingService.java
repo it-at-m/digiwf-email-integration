@@ -1,11 +1,13 @@
 package io.muenchendigital.digiwf.email.integration.domain.service;
 
 import io.muenchendigital.digiwf.email.integration.domain.exception.MissingInformationMailException;
+import io.muenchendigital.digiwf.email.integration.domain.model.Attachment;
 import io.muenchendigital.digiwf.email.integration.domain.model.Mail;
 import io.muenchendigital.digiwf.s3.integration.client.repository.DocumentStorageFileRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tika.Tika;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -23,6 +25,7 @@ public class MailingService {
     private final JavaMailSender mailSender;
     private final String fromAdress;
     private final DocumentStorageFileRepository documentStorageFileRepository;
+    private final int EXPIRES_IN_MINUTES = 3;
 
     /**
      * Send a mail.
@@ -62,20 +65,27 @@ public class MailingService {
             helper.setText(mail.getBody());
             helper.setFrom(fromAdress);
 
-            if (mail.hasReplyTo()) {
+            if (StringUtils.isNotBlank(mail.getReplyTo())) {
                 helper.setReplyTo(mail.getReplyTo());
             }
 
-            if (mail.hasAttachement()) {
-                for (val attachmentPath : mail.getAttachmentPaths()) {
-                    final byte[] binaryFile = this.documentStorageFileRepository.getFile(
-                            attachmentPath,
-                            3
-                    );
-                    final Tika tika = new Tika();
-                    val file = new ByteArrayDataSource(binaryFile, tika.detect(binaryFile));
-                    val fileName = StringUtils.substringAfterLast(attachmentPath, "/");
-                    helper.addAttachment(fileName, file);
+            if (CollectionUtils.isNotEmpty(mail.getAttachments())) {
+                for (val attachment : mail.getAttachments()) {
+                    if (isAttachmentPathAndDocumentStorageNotBlank(attachment)) {
+                        final byte[] binaryFile = this.documentStorageFileRepository.getFile(
+                                attachment.getAttachmentPath(),
+                                EXPIRES_IN_MINUTES,
+                                attachment.getDocumentStorageUrl()
+                        );
+                        final Tika tika = new Tika();
+                        val file = new ByteArrayDataSource(binaryFile, tika.detect(binaryFile));
+                        val fileName = StringUtils.isNotBlank(attachment.getFileName()) ?
+                                attachment.getFileName() :
+                                StringUtils.substringAfterLast(attachment.getAttachmentPath(), "/");
+                        helper.addAttachment(fileName, file);
+                    } else {
+                        log.error("Attachment could not be loaded as some fields were missing: {}", attachment);
+                    }
                 }
             }
         };
@@ -85,4 +95,7 @@ public class MailingService {
         log.info("Mail sent to: {})", mail.getReceivers());
     }
 
+    protected boolean isAttachmentPathAndDocumentStorageNotBlank(final Attachment attachment) {
+        return StringUtils.isNotBlank(attachment.getAttachmentPath()) && StringUtils.isNotBlank(attachment.getDocumentStorageUrl());
+    }
 }

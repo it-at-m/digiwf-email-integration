@@ -7,7 +7,7 @@
     <groupId>io.muenchendigital.digiwf</groupId>
     <artifactId>digiwf-email-integration-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>digiwf-email-integration-parent</name>
     <description>E-Mail integration used by DigiWF</description>
     <url>https://github.com/it-at-m/digiwf-email-integration</url>
@@ -17,13 +17,15 @@
         <maven.compiler.source>11</maven.compiler.source>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.boot.version>2.6.6</spring.boot.version>
+        <spring.boot.version>2.6.7</spring.boot.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <lombok.version>1.18.24</lombok.version>
         <okhttp.version>4.9.3</okhttp.version>
         <maven.surfire.plugin.version>2.22.2</maven.surfire.plugin.version>
         <spring.cloud.version>2021.0.1</spring.cloud.version>
         <tika.version>1.28.1</tika.version>
+        <digiwf.spring.cloudstream.utils.version>0.0.1</digiwf.spring.cloudstream.utils.version>
+        <digiwf.s3.integration.client.version>0.0.6</digiwf.s3.integration.client.version>
     </properties>
 
     <modules>
