@@ -1,0 +1,167 @@
+{
+  "name": "Send E-Mail",
+  "id": "de.muenchen.digitalwf.templates.send-email",
+  "appliesTo": [
+    "bpmn:CallActivity"
+  ],
+  "properties": [
+    {
+      "label": "Template",
+      "type": "String",
+      "editable": false,
+      "value": "StreamingTemplateV01",
+      "binding": {
+        "type": "property",
+        "name": "calledElement"
+      }
+    },
+    {
+      "label": "Event Topic",
+      "type": "String",
+      "value": "",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "target": "app_topic_name"
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+      "label": "Event Message",
+      "type": "String",
+      "editable": false,
+      "value": "genericEvent",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "target": "app_message_name"
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+      "label": "Type Header",
+      "type": "String",
+      "editable": false,
+      "value": "sendMailFromEventBus",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "target": "app_type_name"
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+      "label": "Receiver",
+      "type": "String",
+      "value": "",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "target": "receivers"
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+      "label": "Receiver (CC)",
+      "type": "String",
+      "value": "",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "target": "receiversCc"
+      },
+      "constraints": {
+        "notEmpty": false
+      }
+    },
+    {
+      "label": "Receiver (BCC)",
+      "type": "String",
+      "value": "",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "target": "receiversBcc"
+      },
+      "constraints": {
+        "notEmpty": false
+      }
+    },
+    {
+      "label": "Subject",
+      "type": "String",
+      "value": "",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "target": "subject"
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+      "label": "Body",
+      "type": "Text",
+      "value": "",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "target": "body"
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+      "label": "Reply-To Address",
+      "type": "String",
+      "value": "",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "target": "replyTo"
+      },
+      "constraints": {
+        "notEmpty": false
+      }
+    },
+    {
+      "label": "Attachment Paths (S3)",
+      "type": "String",
+      "value": "",
+      "description": "Create an array with json.array('','') (not yet implemented)",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "target": "attachmentPaths"
+      },
+      "constraints": {
+        "notEmpty": false
+      }
+    },
+    {
+      "label": "Dispatch Status",
+      "value": "mailSentStatus",
+      "type": "Boolean",
+      "binding": {
+        "type": "camunda:out",
+        "source": "mailSentStatus"
+      },
+      "constraints": {
+        "notEmpty": false
+      }
+    }
+  ],
+  "entriesVisible": {
+    "_all": false
+  }
+}
