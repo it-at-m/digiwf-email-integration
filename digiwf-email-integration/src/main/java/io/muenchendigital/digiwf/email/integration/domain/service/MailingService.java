@@ -63,13 +63,13 @@ public class MailingService {
             helper.setText(mail.getBody());
             helper.setFrom(fromAdress);
 
-            if (mail.hasReplyTo()) {
+            if (StringUtils.isNotBlank(mail.getReplyTo())) {
                 helper.setReplyTo(mail.getReplyTo());
             }
 
-            if (mail.hasAttachement()) {
+            if (mail.getAttachments() != null && mail.getAttachments().size() > 0) {
                 for (val attachment : mail.getAttachments()) {
-                    if (attachment.hasRequiredData()) {
+                    if (StringUtils.isNotBlank(attachment.getAttachmentPath()) && StringUtils.isNotBlank(attachment.getDocumentStorageUrl())) {
                         final byte[] binaryFile = this.documentStorageFileRepository.getFile(
                                 attachment.getAttachmentPath(),
                                 EXPIRES_IN_MINUTES,
@@ -77,7 +77,7 @@ public class MailingService {
                         );
                         final Tika tika = new Tika();
                         val file = new ByteArrayDataSource(binaryFile, tika.detect(binaryFile));
-                        val fileName = attachment.hasFileName() ?
+                        val fileName = StringUtils.isNotBlank(attachment.getFileName()) ?
                                 attachment.getFileName() :
                                 StringUtils.substringAfterLast(attachment.getAttachmentPath(), "/");
                         helper.addAttachment(fileName, file);

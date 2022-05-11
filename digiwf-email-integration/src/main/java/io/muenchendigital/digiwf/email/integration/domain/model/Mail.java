@@ -3,7 +3,6 @@ package io.muenchendigital.digiwf.email.integration.domain.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -46,13 +45,5 @@ public class Mail {
     private String replyTo;
 
     private List<Attachment> attachments;
-
-    public boolean hasAttachement() {
-        return this.attachments != null && this.attachments.size() > 0;
-    }
-
-    public boolean hasReplyTo() {
-        return StringUtils.isNotBlank(this.replyTo);
-    }
 
 }
