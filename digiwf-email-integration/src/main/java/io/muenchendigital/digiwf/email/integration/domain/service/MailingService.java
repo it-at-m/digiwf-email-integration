@@ -1,6 +1,7 @@
 package io.muenchendigital.digiwf.email.integration.domain.service;
 
 import io.muenchendigital.digiwf.email.integration.domain.exception.MissingInformationMailException;
+import io.muenchendigital.digiwf.email.integration.domain.model.Attachment;
 import io.muenchendigital.digiwf.email.integration.domain.model.Mail;
 import io.muenchendigital.digiwf.s3.integration.client.repository.DocumentStorageFileRepository;
 import lombok.AllArgsConstructor;
@@ -67,9 +68,9 @@ public class MailingService {
                 helper.setReplyTo(mail.getReplyTo());
             }
 
-            if (mail.getAttachments() != null && mail.getAttachments().size() > 0) {
+            if (hasAttachment(mail)) {
                 for (val attachment : mail.getAttachments()) {
-                    if (StringUtils.isNotBlank(attachment.getAttachmentPath()) && StringUtils.isNotBlank(attachment.getDocumentStorageUrl())) {
+                    if (isAttachmentPathAndDocumentStorageNotBlank(attachment)) {
                         final byte[] binaryFile = this.documentStorageFileRepository.getFile(
                                 attachment.getAttachmentPath(),
                                 EXPIRES_IN_MINUTES,
@@ -93,4 +94,11 @@ public class MailingService {
         log.info("Mail sent to: {})", mail.getReceivers());
     }
 
+    private boolean hasAttachment(final Mail mail) {
+        return mail.getAttachments() != null && mail.getAttachments().size() > 0;
+    }
+
+    private boolean isAttachmentPathAndDocumentStorageNotBlank(final Attachment attachment) {
+        return StringUtils.isNotBlank(attachment.getAttachmentPath()) && StringUtils.isNotBlank(attachment.getDocumentStorageUrl());
+    }
 }
