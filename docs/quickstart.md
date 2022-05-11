@@ -48,15 +48,7 @@ implementation group: 'org.springframework.cloud', name: 'spring-cloud-stream-bi
    typeMappings. These are configured for you by the digiwf-mail-integration-starter. You also have to configure the
    topics you want to read / send messages from / to.
 
-5. Configure S3
-
-```
-io.muenchendigital.digiwf.s3.client.document-storage-url: http://s3-integration-url:port
-```
-
-See [this](https://github.com/it-at-m/digiwf-spring-cloudstream-utils) for an example.
-
-6. Configure your application
+5. Configure your application
 
 ```
 spring:
@@ -82,5 +74,5 @@ spring:
 
 You can also use digiwf.mail.fromAddress to define a mail address when not using smtp.auth.
 
-7. Define a RestTemplate. For an example, please refer to
+6. Define a RestTemplate. For an example, please refer to
    the [example project](https://github.com/it-at-m/digiwf-email-integration/tree/dev/example-digiwf-email-integration).

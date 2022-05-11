@@ -1,7 +1,6 @@
 package io.muenchendigital.digiwf.email.integration.api.controller;
 
 import io.muenchendigital.digiwf.email.integration.domain.exception.MissingInformationMailException;
-import io.muenchendigital.digiwf.email.integration.domain.model.Attachment;
 import io.muenchendigital.digiwf.email.integration.domain.model.Mail;
 import io.muenchendigital.digiwf.email.integration.domain.service.MailingService;
 import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.service.PayloadSenderService;
@@ -10,9 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -51,11 +47,13 @@ public class ExampleController {
         mail.setSubject("Test1234");
         mail.setBody("Hallo test123");
         mail.setReplyTo("");
-        final Attachment attachment = new Attachment();
-        attachment.setDocumentStorageUrl("http://localhost:8086");
-        attachment.setAttachmentPath("test/picture.jpg");
-        final List<Attachment> attachments = new ArrayList<>();
-        mail.setAttachments(attachments);
+//        Attachment
+//        final Attachment attachment = new Attachment();
+//        attachment.setDocumentStorageUrl("http://localhost:8086");
+//        attachment.setAttachmentPath("test/picture.jpg");
+//        final List<Attachment> attachments = new ArrayList<>();
+//        attachments.add(attachment);
+//        mail.setAttachments(attachments);
         return mail;
     }
 
