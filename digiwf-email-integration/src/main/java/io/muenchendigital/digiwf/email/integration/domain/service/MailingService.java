@@ -7,6 +7,7 @@ import io.muenchendigital.digiwf.s3.integration.client.repository.DocumentStorag
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tika.Tika;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -68,7 +69,7 @@ public class MailingService {
                 helper.setReplyTo(mail.getReplyTo());
             }
 
-            if (hasAttachment(mail)) {
+            if (CollectionUtils.isNotEmpty(mail.getAttachments())) {
                 for (val attachment : mail.getAttachments()) {
                     if (isAttachmentPathAndDocumentStorageNotBlank(attachment)) {
                         final byte[] binaryFile = this.documentStorageFileRepository.getFile(
@@ -94,11 +95,7 @@ public class MailingService {
         log.info("Mail sent to: {})", mail.getReceivers());
     }
 
-    private boolean hasAttachment(final Mail mail) {
-        return mail.getAttachments() != null && mail.getAttachments().size() > 0;
-    }
-
-    private boolean isAttachmentPathAndDocumentStorageNotBlank(final Attachment attachment) {
+    protected boolean isAttachmentPathAndDocumentStorageNotBlank(final Attachment attachment) {
         return StringUtils.isNotBlank(attachment.getAttachmentPath()) && StringUtils.isNotBlank(attachment.getDocumentStorageUrl());
     }
 }
