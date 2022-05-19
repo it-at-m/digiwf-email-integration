@@ -32,6 +32,7 @@
         <module>digiwf-email-integration</module>
         <module>digiwf-email-integration-starter</module>
         <module>example-digiwf-email-integration</module>
+        <module>digiwf-email-integration-service</module>
     </modules>
 
     <dependencyManagement>
