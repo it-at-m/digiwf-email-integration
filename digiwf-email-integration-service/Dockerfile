@@ -1,6 +1,6 @@
 FROM openjdk:11-jre-slim
 
-EXPOSE 8081
+EXPOSE 8080
 
 RUN mkdir /app
 
