@@ -44,3 +44,6 @@ gradle
 /example-digiwf-email-integration/src/main/resources/application-local.yml
 /example-digiwf-email-integration/src/main/resources/application.yml
 /example-digiwf-email-integration/src/main/resources/application-streaming.properties
+/digiwf-email-integration-service/src/main/resources/application-local.yml
+/digiwf-email-integration-service/src/main/resources/application-streaming.properties
+/digiwf-email-integration-service/src/main/resources/application.yml

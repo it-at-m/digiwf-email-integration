@@ -11,12 +11,13 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Java and Maven
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3.3.0
         with:
-          java-version: 11
+          distribution: 'zulu'
+          java-version: '11'
 
       - name: Release Maven package
         uses: samuelmeuli/action-maven-publish@v1
@@ -25,3 +26,24 @@ jobs:
           gpg_passphrase: ${{ secrets.gpg_passphrase }}
           nexus_username: ${{ secrets.nexus_username }}
           nexus_password: ${{ secrets.nexus_password }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_KEY }}
+
+      - name: Get package version
+        id: package_version
+        uses: Saionaro/extract-package-version@v1.1.1
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ./digiwf-email-integration-service
+          push: true
+          tags: itatm/digiwf-email-integration-service:latest,itatm/digiwf-email-integration-service:${{ steps.package_version.outputs.version }}

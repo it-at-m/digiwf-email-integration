@@ -1,5 +1,5 @@
 ## Architecture
 
 <div>
-    <img src="https://raw.githubusercontent.com/it-at-m/digiwf-email-integration/add-docs/images/architecture.png" alt="Architecture">
+    <img src="https://github.com/it-at-m/digiwf-email-integration/raw/de4289200223bd74548dc462f07f9d07efdcb27c/images/architecture.png" alt="Architecture">
 </div>
