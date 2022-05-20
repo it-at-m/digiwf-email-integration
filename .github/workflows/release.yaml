@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - fix-docker-image-pipeline
 
 jobs:
   release:
@@ -37,13 +38,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_KEY }}
 
-      - name: Get package version
-        id: package_version
-        uses: Saionaro/extract-package-version@v1.1.1
+      - name: Maven version
+        id: get-version
+        uses: JActions/maven-version@v1.0.0
 
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: ./digiwf-email-integration-service
           push: true
-          tags: itatm/digiwf-email-integration-service:latest,itatm/digiwf-email-integration-service:${{ steps.package_version.outputs.version }}
+          tags: itatm/digiwf-email-integration-service:latest,itatm/digiwf-email-integration-service:${{ steps.get-version.outputs.version }}
