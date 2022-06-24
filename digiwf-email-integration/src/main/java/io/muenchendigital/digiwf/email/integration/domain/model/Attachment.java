@@ -13,17 +13,12 @@ import lombok.RequiredArgsConstructor;
 public class Attachment {
 
     /**
-     * Url to the s3 service.
+     * The S3 presigned url to load the file from in the S3 storage.
      */
-    private String documentStorageUrl;
+    private String s3PresignedUrl;
 
     /**
-     * Path to the file inside in the S3 storage.
-     */
-    private String attachmentPath;
-
-    /**
-     * Optional filename. If not set, the filename of the file in the S3 Storage is used.
+     * Mandatory filename.
      */
     private String fileName;
 

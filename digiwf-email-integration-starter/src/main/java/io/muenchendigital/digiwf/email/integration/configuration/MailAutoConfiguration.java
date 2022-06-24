@@ -2,7 +2,7 @@ package io.muenchendigital.digiwf.email.integration.configuration;
 
 import io.muenchendigital.digiwf.email.integration.domain.service.MailingService;
 import io.muenchendigital.digiwf.s3.integration.client.configuration.S3IntegrationClientAutoConfiguration;
-import io.muenchendigital.digiwf.s3.integration.client.repository.DocumentStorageFileRepository;
+import io.muenchendigital.digiwf.s3.integration.client.repository.transfer.S3FileTransferRepository;
 import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.infrastructure.RoutingCallback;
 import io.muenchendigital.digiwf.spring.cloudstream.utils.configuration.StreamingConfiguration;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +42,7 @@ public class MailAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public JavaMailSender getJavaMailSender() throws MessagingException {
-        return mailConfiguration.getJavaMailSender(
+        return this.mailConfiguration.getJavaMailSender(
                 this.mailProperties.getHost(),
                 this.mailProperties.getPort(),
                 this.mailProperties.getProtocol(),
@@ -55,14 +55,14 @@ public class MailAutoConfiguration {
     /**
      * Configures the {@link MailingService}
      *
-     * @param javaMailSender                the configured JavaMailSender
-     * @param documentStorageFileRepository a documentStorageFileRepository from the S3 library
+     * @param javaMailSender           the configured JavaMailSender
+     * @param s3FileTransferRepository a {@link S3FileTransferRepository} from the S3 library
      * @return configured MailingService
      */
     @Bean
     @ConditionalOnMissingBean
-    public MailingService getMailingService(final JavaMailSender javaMailSender, final DocumentStorageFileRepository documentStorageFileRepository) {
-        return new MailingService(javaMailSender, customMailProperties.getFromAddress(), documentStorageFileRepository);
+    public MailingService getMailingService(final JavaMailSender javaMailSender, final S3FileTransferRepository s3FileTransferRepository) {
+        return new MailingService(javaMailSender, this.customMailProperties.getFromAddress(), s3FileTransferRepository);
     }
 
     /**
