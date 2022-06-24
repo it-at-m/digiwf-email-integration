@@ -28,7 +28,7 @@ public class ExampleController {
     @GetMapping(value = "/testSendMail")
     public void testSendMail() {
         try {
-            mailingService.sendMail(getMail());
+            this.mailingService.sendMail(this.getMail());
         } catch (final MissingInformationMailException e) {
             log.error(e.toString());
         }
@@ -42,12 +42,12 @@ public class ExampleController {
      */
     @GetMapping(value = "/testEventBus")
     public void testEventBus() {
-        genericPayloadSender.sendPayload(getMail(), "sendMailFromEventBus");
+        this.genericPayloadSender.sendPayload(this.getMail(), "sendMailFromEventBus");
     }
 
     private Mail getMail() {
         final Mail mail = new Mail();
-        mail.setReceivers(receiver);
+        mail.setReceivers(this.receiver);
         mail.setSubject("Test1234");
         mail.setBody("Hallo test123");
         mail.setReplyTo("");
@@ -60,12 +60,11 @@ public class ExampleController {
 
     private List<Attachment> getAttachment() {
         final Attachment attachment1 = new Attachment();
-        attachment1.setDocumentStorageUrl("http://localhost:8086");
-        attachment1.setAttachmentPath("test/picture.jpg");
+        attachment1.setS3PresignedUrl("test/picture.jpg");
+        attachment1.setFileName("picture.jpg");
 
         final Attachment attachment2 = new Attachment();
-        attachment2.setDocumentStorageUrl("http://localhost:8086");
-        attachment2.setAttachmentPath("test/picture.jpg");
+        attachment2.setS3PresignedUrl("test/picture.jpg");
         attachment2.setFileName("image.jpg");
 
         final List<Attachment> attachmentList = new ArrayList<>();
@@ -73,7 +72,6 @@ public class ExampleController {
         attachmentList.add(attachment2);
 
         return attachmentList;
-
     }
 
 }

@@ -1,7 +1,7 @@
 package io.muenchendigital.digiwf.email.integration.domain.service;
 
 import io.muenchendigital.digiwf.email.integration.domain.model.Attachment;
-import io.muenchendigital.digiwf.s3.integration.client.repository.DocumentStorageFileRepository;
+import io.muenchendigital.digiwf.s3.integration.client.repository.transfer.S3FileTransferRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 public class MailingServiceTest {
 
     @Mock
-    private DocumentStorageFileRepository documentStorageFileRepository;
+    private S3FileTransferRepository s3FileTransferRepository;
 
     @Mock
     private JavaMailSender javaMailSender;
@@ -25,7 +25,7 @@ public class MailingServiceTest {
 
     @BeforeEach
     public void beforeEach() {
-        this.mailingService = new MailingService(this.javaMailSender, "from@example.com", this.documentStorageFileRepository);
+        this.mailingService = new MailingService(this.javaMailSender, "from@example.com", this.s3FileTransferRepository);
 
     }
 
@@ -33,17 +33,17 @@ public class MailingServiceTest {
     void isAttachmentPathAndDocumentStorageNotBlank() {
         final Attachment attachment = new Attachment();
 
-        assertThat(mailingService.isAttachmentPathAndDocumentStorageNotBlank(attachment), is(false));
-        attachment.setAttachmentPath("");
-        assertThat(mailingService.isAttachmentPathAndDocumentStorageNotBlank(attachment), is(false));
-        attachment.setDocumentStorageUrl("");
-        assertThat(mailingService.isAttachmentPathAndDocumentStorageNotBlank(attachment), is(false));
-        attachment.setAttachmentPath("Path");
-        assertThat(mailingService.isAttachmentPathAndDocumentStorageNotBlank(attachment), is(false));
-        attachment.setAttachmentPath("");
-        attachment.setDocumentStorageUrl("Url");
-        assertThat(mailingService.isAttachmentPathAndDocumentStorageNotBlank(attachment), is(false));
-        attachment.setAttachmentPath("Path");
-        assertThat(mailingService.isAttachmentPathAndDocumentStorageNotBlank(attachment), is(true));
+        assertThat(this.mailingService.isPresignedUrlAndDocumentStorageNotBlank(attachment), is(false));
+        attachment.setS3PresignedUrl("");
+        assertThat(this.mailingService.isPresignedUrlAndDocumentStorageNotBlank(attachment), is(false));
+        attachment.setFileName("");
+        assertThat(this.mailingService.isPresignedUrlAndDocumentStorageNotBlank(attachment), is(false));
+        attachment.setS3PresignedUrl("Path");
+        assertThat(this.mailingService.isPresignedUrlAndDocumentStorageNotBlank(attachment), is(false));
+        attachment.setS3PresignedUrl("");
+        attachment.setFileName("Url");
+        assertThat(this.mailingService.isPresignedUrlAndDocumentStorageNotBlank(attachment), is(false));
+        attachment.setS3PresignedUrl("Path");
+        assertThat(this.mailingService.isPresignedUrlAndDocumentStorageNotBlank(attachment), is(true));
     }
 }
