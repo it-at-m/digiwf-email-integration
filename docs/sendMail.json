@@ -142,7 +142,7 @@
       "binding": {
         "type": "camunda:in",
         "expression": true,
-        "target": "attachmentPaths"
+        "target": "attachments"
       },
       "constraints": {
         "notEmpty": false

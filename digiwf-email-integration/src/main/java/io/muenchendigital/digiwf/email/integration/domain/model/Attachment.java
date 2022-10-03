@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 /**
  * Attachment File you want to get from the S3 storage.
  */
@@ -15,16 +18,20 @@ public class Attachment {
     /**
      * Url to the s3 service.
      */
-    private String documentStorageUrl;
+    @NotBlank(message = "Presigned Url is mandatory")
+    private String url;
 
     /**
      * Path to the file inside in the S3 storage.
      */
-    private String attachmentPath;
+    @NotBlank(message = "Path is mandatory")
+    private String path;
 
     /**
-     * Optional filename. If not set, the filename of the file in the S3 Storage is used.
+     * Proper Http Method (Post, Put, Get, Delete) to interact with S3.
+     * Note: Only GET is supported. The mail integration is not intended to modify files!
      */
-    private String fileName;
+    @Pattern(regexp = "GET", message = "Only action GET is supported")
+    private String action;
 
 }

@@ -1,13 +1,11 @@
 package io.muenchendigital.digiwf.email.integration.api.streaming;
 
-import io.muenchendigital.digiwf.email.integration.domain.exception.MissingInformationMailException;
 import io.muenchendigital.digiwf.email.integration.domain.model.Mail;
 import io.muenchendigital.digiwf.email.integration.domain.service.MailingService;
 import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.service.CorrelateMessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
-import org.springframework.mail.MailException;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
@@ -38,11 +36,11 @@ public class MessageProcessor {
             final Mail mail = message.getPayload();
             log.debug("Mail: {}", mail);
             try {
-                mailingService.sendMail(mail);
-                emitResponse(message.getHeaders(), true);
-            } catch (final MissingInformationMailException | MailException e) {
+                this.mailingService.sendMail(mail);
+                this.emitResponse(message.getHeaders(), true);
+            } catch (final RuntimeException e) {
                 log.error("Mail could not be sent: {}", e.getMessage());
-                emitResponse(message.getHeaders(), false);
+                this.emitResponse(message.getHeaders(), false);
             }
         };
     }
@@ -56,6 +54,6 @@ public class MessageProcessor {
     public void emitResponse(final MessageHeaders messageHeaders, final boolean status) {
         final Map<String, Object> correlatePayload = new HashMap<>();
         correlatePayload.put(MAIL_SENT_STATUS, status);
-        correlateMessageService.sendCorrelateMessage(messageHeaders, correlatePayload);
+        this.correlateMessageService.sendCorrelateMessage(messageHeaders, correlatePayload);
     }
 }

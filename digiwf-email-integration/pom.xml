@@ -30,6 +30,16 @@
             <version>${tika.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>jbig2-imageio</artifactId>
+            <version>${jbig2-imageio.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jai-imageio</groupId>
+            <artifactId>jai-imageio-jpeg2000</artifactId>
+            <version>${jai-imageio-jpeg2000.version}</version>
+        </dependency>
+        <dependency>
             <groupId>io.muenchendigital.digiwf</groupId>
             <artifactId>digiwf-s3-integration-client</artifactId>
             <version>${digiwf.s3.integration.client.version}</version>
