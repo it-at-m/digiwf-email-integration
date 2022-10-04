@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class Mail {
      */
     private String replyTo;
 
+    @Valid
     private List<Attachment> attachments;
 
 }
