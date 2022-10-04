@@ -31,6 +31,7 @@ public class Attachment {
      * Proper Http Method (Post, Put, Get, Delete) to interact with S3.
      * Note: Only GET is supported. The mail integration is not intended to modify files!
      */
+    @NotBlank(message = "Action is mandatory")
     @Pattern(regexp = "GET", message = "Only action GET is supported")
     private String action;
 
