@@ -15,11 +15,8 @@ import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.util.ByteArrayDataSource;
 import javax.validation.*;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Set;
 
 @Slf4j
@@ -29,10 +26,6 @@ public class MailingService {
     private final JavaMailSender mailSender;
     private final String fromAdress;
     private final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-    private final HttpClient httpClient = HttpClient.newBuilder()
-            .version(HttpClient.Version.HTTP_1_1)
-            .connectTimeout(Duration.ofSeconds(60))
-            .build();
 
     /**
      * Send a mail.
@@ -71,24 +64,19 @@ public class MailingService {
             // mail attachments
             if (CollectionUtils.isNotEmpty(mail.getAttachments())) {
                 for (val attachment : mail.getAttachments()) {
-                    // TODO @lmoesle async?
-                    final HttpRequest request = HttpRequest.newBuilder()
-                            .GET()
-                            .uri(URI.create(attachment.getUrl()))
-                            .build();
-                    final HttpResponse<String> response = this.httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-                    // don't send the mail if any file is missing
-                    if (response.statusCode() >= 400) {
+                    try {
+                        // download file from s3
+                        final URL binaryFile = new URL(attachment.getUrl());
+                        final Tika tika = new Tika();
+                        final InputStream fileInputStream = binaryFile.openStream();
+                        final ByteArrayDataSource file = new ByteArrayDataSource(fileInputStream, tika.detect(binaryFile));
+                        final String fileName = StringUtils.substringAfterLast(attachment.getPath(), "/");
+                        // add attachment
+                        helper.addAttachment(fileName, file);
+                    } catch (final java.io.IOException ex) {
                         log.error("An attachment could not be loaded: {}", attachment);
                         throw new RuntimeException(String.format("Could not download file %s", attachment.getPath()));
                     }
-                    log.info("Downloaded file {} with status {}", attachment.getPath(), response.statusCode());
-                    final String binaryFile = response.body();
-                    final Tika tika = new Tika();
-                    // TODO files are broken if you download and try to open them
-                    final ByteArrayDataSource file = new ByteArrayDataSource(binaryFile, tika.detect(binaryFile));
-                    final String fileName = StringUtils.substringAfterLast(attachment.getPath(), "/");
-                    helper.addAttachment(fileName, file);
                 }
             }
         };
