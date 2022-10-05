@@ -39,19 +39,12 @@
             <artifactId>jai-imageio-jpeg2000</artifactId>
             <version>${jai-imageio-jpeg2000.version}</version>
         </dependency>
-        <dependency>
-            <groupId>io.muenchendigital.digiwf</groupId>
-            <artifactId>digiwf-s3-integration-client</artifactId>
-            <version>${digiwf.s3.integration.client.version}</version>
-            <scope>provided</scope>
-        </dependency>
 
-        <!-- streaming -->
+        <!-- Spring Cloud Stream -->
         <dependency>
             <groupId>io.muenchendigital.digiwf</groupId>
-            <artifactId>digiwf-spring-cloudstream-utils</artifactId>
+            <artifactId>digiwf-spring-cloudstream-utils-starter</artifactId>
             <version>${digiwf.spring.cloudstream.utils.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- testing -->

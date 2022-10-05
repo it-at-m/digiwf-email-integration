@@ -20,8 +20,9 @@
       "type": "String",
       "value": "",
       "binding": {
-        "type": "camunda:in",
+        "type": "camunda:inputParameter",
         "expression": true,
+        "name": "app_topic_name",
         "target": "app_topic_name"
       },
       "constraints": {
@@ -34,8 +35,9 @@
       "editable": false,
       "value": "genericEvent",
       "binding": {
-        "type": "camunda:in",
+        "type": "camunda:inputParameter",
         "expression": true,
+        "name": "app_message_name",
         "target": "app_message_name"
       },
       "constraints": {
@@ -48,8 +50,9 @@
       "editable": false,
       "value": "sendMailFromEventBus",
       "binding": {
-        "type": "camunda:in",
+        "type": "camunda:inputParameter",
         "expression": true,
+        "name": "app_type_name",
         "target": "app_type_name"
       },
       "constraints": {
@@ -61,8 +64,9 @@
       "type": "String",
       "value": "",
       "binding": {
-        "type": "camunda:in",
+        "type": "camunda:inputParameter",
         "expression": true,
+        "name": "receivers",
         "target": "receivers"
       },
       "constraints": {
@@ -74,8 +78,9 @@
       "type": "String",
       "value": "",
       "binding": {
-        "type": "camunda:in",
+        "type": "camunda:inputParameter",
         "expression": true,
+        "name": "receiversCc",
         "target": "receiversCc"
       },
       "constraints": {
@@ -87,8 +92,9 @@
       "type": "String",
       "value": "",
       "binding": {
-        "type": "camunda:in",
+        "type": "camunda:inputParameter",
         "expression": true,
+        "name": "receiversBcc",
         "target": "receiversBcc"
       },
       "constraints": {
@@ -100,8 +106,9 @@
       "type": "String",
       "value": "",
       "binding": {
-        "type": "camunda:in",
+        "type": "camunda:inputParameter",
         "expression": true,
+        "name": "subject",
         "target": "subject"
       },
       "constraints": {
@@ -113,8 +120,9 @@
       "type": "Text",
       "value": "",
       "binding": {
-        "type": "camunda:in",
+        "type": "camunda:inputParameter",
         "expression": true,
+        "name": "body",
         "target": "body"
       },
       "constraints": {
@@ -126,8 +134,9 @@
       "type": "String",
       "value": "",
       "binding": {
-        "type": "camunda:in",
+        "type": "camunda:inputParameter",
         "expression": true,
+        "name": "replyTo",
         "target": "replyTo"
       },
       "constraints": {
@@ -140,8 +149,9 @@
       "value": "",
       "description": "Create an array with json.array('','') (not yet implemented)",
       "binding": {
-        "type": "camunda:in",
+        "type": "camunda:inputParameter",
         "expression": true,
+        "name": "attachments",
         "target": "attachments"
       },
       "constraints": {
@@ -151,7 +161,7 @@
     {
       "label": "Dispatch Status",
       "value": "mailSentStatus",
-      "type": "Boolean",
+      "type": "String",
       "binding": {
         "type": "camunda:out",
         "source": "mailSentStatus"

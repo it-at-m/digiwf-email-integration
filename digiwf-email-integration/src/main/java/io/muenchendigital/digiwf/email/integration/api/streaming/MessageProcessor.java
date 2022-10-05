@@ -2,7 +2,7 @@ package io.muenchendigital.digiwf.email.integration.api.streaming;
 
 import io.muenchendigital.digiwf.email.integration.domain.model.Mail;
 import io.muenchendigital.digiwf.email.integration.domain.service.MailingService;
-import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.service.CorrelateMessageService;
+import io.muenchendigital.digiwf.spring.cloudstream.utils.api.streaming.message.service.CorrelateMessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
