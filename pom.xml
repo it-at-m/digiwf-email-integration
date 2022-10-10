@@ -7,7 +7,7 @@
     <groupId>io.muenchendigital.digiwf</groupId>
     <artifactId>digiwf-email-integration-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <name>digiwf-email-integration-parent</name>
     <description>E-Mail integration used by DigiWF</description>
     <url>https://github.com/it-at-m/digiwf-email-integration</url>
