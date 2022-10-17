@@ -10,7 +10,6 @@ import org.apache.tika.Tika;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
 import javax.mail.Message;
@@ -21,9 +20,8 @@ import java.io.InputStream;
 import java.net.URL;
 
 @Slf4j
-@Validated
-@Component
 @AllArgsConstructor
+@Validated
 public class MailingService {
 
     private final JavaMailSender mailSender;
