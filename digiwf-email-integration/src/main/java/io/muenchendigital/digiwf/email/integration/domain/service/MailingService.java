@@ -10,36 +10,31 @@ import org.apache.tika.Tika;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.util.ByteArrayDataSource;
-import javax.validation.*;
+import javax.validation.Valid;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Set;
 
 @Slf4j
+@Validated
+@Component
 @AllArgsConstructor
 public class MailingService {
 
     private final JavaMailSender mailSender;
     private final String fromAdress;
-    private final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 
     /**
      * Send a mail.
      *
      * @param mail mail that is sent
      */
-    public void sendMail(final Mail mail) throws RuntimeException {
-        // validation
-        final Validator validator = this.validatorFactory.getValidator();
-        final Set<ConstraintViolation<Mail>> mailViolations = validator.validate(mail);
-        if (!mailViolations.isEmpty()) {
-            throw new ConstraintViolationException(mailViolations);
-        }
-
+    public void sendMail(@Valid final Mail mail) throws RuntimeException {
         //handler
         final MimeMessagePreparator preparator = mimeMessage -> {
             mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail.getReceivers()));
