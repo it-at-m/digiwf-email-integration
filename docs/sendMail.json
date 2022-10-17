@@ -149,7 +149,7 @@
       "value": "",
       "description": "Array of presigned urls created with s3 integration",
       "binding": {
-        "type": "camunda:inputParameter",
+        "type": "camunda:in",
         "expression": true,
         "name": "attachments",
         "target": "attachments"
