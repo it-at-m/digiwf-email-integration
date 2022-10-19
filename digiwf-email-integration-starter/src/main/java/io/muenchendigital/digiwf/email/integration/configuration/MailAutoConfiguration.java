@@ -62,7 +62,7 @@ public class MailAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public MailingService getMailingService(final JavaMailSender javaMailSender, final DocumentStorageFileRepository documentStorageFileRepository) {
-        return new MailingService(javaMailSender, customMailProperties.getFromAddress(), documentStorageFileRepository);
+        return new MailingService(javaMailSender, customMailProperties.getFromAddress());
     }
 
     /**

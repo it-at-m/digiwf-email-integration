@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -17,6 +19,7 @@ public class Mail {
     /**
      * Receiver addresses of the mail, comma separated.
      */
+    @NotBlank(message = "No receivers given")
     private String receivers;
 
     /**
@@ -32,11 +35,13 @@ public class Mail {
     /**
      * Subject of the mail.
      */
+    @NotBlank(message = "No subject given")
     private String subject;
 
     /**
      * Body of the mail.
      */
+    @NotBlank(message = "No body given")
     private String body;
 
     /**
@@ -44,6 +49,7 @@ public class Mail {
      */
     private String replyTo;
 
+    @Valid
     private List<Attachment> attachments;
 
 }
