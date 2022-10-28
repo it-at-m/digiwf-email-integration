@@ -6,7 +6,7 @@
     <parent>
         <artifactId>digiwf-email-integration-parent</artifactId>
         <groupId>io.muenchendigital.digiwf</groupId>
-        <version>0.0.2</version>
+        <version>0.1.0</version>
     </parent>
 
     <artifactId>digiwf-email-integration</artifactId>
@@ -30,18 +30,21 @@
             <version>${tika.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.muenchendigital.digiwf</groupId>
-            <artifactId>digiwf-s3-integration-client</artifactId>
-            <version>${digiwf.s3.integration.client.version}</version>
-            <scope>provided</scope>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>jbig2-imageio</artifactId>
+            <version>${jbig2-imageio.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jai-imageio</groupId>
+            <artifactId>jai-imageio-jpeg2000</artifactId>
+            <version>${jai-imageio-jpeg2000.version}</version>
         </dependency>
 
-        <!-- streaming -->
+        <!-- Spring Cloud Stream -->
         <dependency>
             <groupId>io.muenchendigital.digiwf</groupId>
-            <artifactId>digiwf-spring-cloudstream-utils</artifactId>
+            <artifactId>digiwf-spring-cloudstream-utils-starter</artifactId>
             <version>${digiwf.spring.cloudstream.utils.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- testing -->
